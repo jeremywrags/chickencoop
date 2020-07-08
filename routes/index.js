@@ -1,16 +1,21 @@
 var express = require('express');
 var router = express.Router();
 var sensor = require("node-dht-sensor");
+const {spawn} = require('child_process');
+
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-sensor.read(22, 4, function(err, temperature, humidity) {
-  if (!err) {
-    console.log(`temp: ${(((9/5)*temperature)+32).toFixed(1)}°F, humidity: ${humidity.toFixed(1)}%`);
-  }
-});	
   res.render('index', { title: 'Express' });
+});
+
+/* GET home page. */
+router.get('/rotate', function(req, res, next) {
+  var process = spawn('python',["./coopdoor.py", 
+                            req.query.direction, 
+                            req.query.rotations]); 
+  res.send("OK");
 });
 
 module.exports = router;
