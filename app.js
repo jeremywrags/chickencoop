@@ -8,7 +8,7 @@ var sensor = require("node-dht-sensor");
 
 const MongoClient = require("mongodb").MongoClient
 const uri = "mongodb://chickencoop:Welcome1@ds149960.mlab.com:49960/chickencoop";
-const interval = (10000 * 60) * 10;
+const interval = (10000 * 60) * .1;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -52,7 +52,7 @@ function readDHT22() {
   });	
 }
 
-/*MongoClient.connect(uri, (err, client) => {
+MongoClient.connect(uri, (err, client) => {
   if (err){
       console.log(err);
   }
@@ -63,17 +63,17 @@ function readDHT22() {
       if (!err) {        
         var newDate = new Date();
         var dateString = newDate.toUTCString();
-        console.log(`temp: ${(((9/5)*temperature)+32).toFixed(1)}°F, humidity: ${humidity.toFixed(1)}%, timestamp: ${convertUTCDateToLocalDate(new Date(dateString))}`);
+        //console.log(`temp: ${(((9/5)*temperature)+32).toFixed(1)}°F, humidity: ${humidity.toFixed(1)}%, timestamp: ${convertUTCDateToLocalDate(new Date(dateString))}`);
         var reading = { tempurature: `${(((9/5)*temperature)+32).toFixed(1)}°F`, humidity: `${humidity.toFixed(1)}%`, timestamp: `${convertUTCDateToLocalDate(new Date(dateString))}`};        
         dbo.collection("Readings").insertOne(reading, function(err, res) {
           if (err) throw err;
-          console.log("1 document inserted");          
+          //console.log("1 document inserted");          
         });
       }
     });	
   }, interval);
 })
-*/
+
 function convertUTCDateToLocalDate(date) {
   var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
 

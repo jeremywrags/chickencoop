@@ -8,7 +8,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js" integrity="sha512-M+hXwltZ3+0nFQJiVke7pqXY7VdtWW2jVG31zrml+eteTP7im25FdwtLhIBTWkaHRQyPrhO2uy8glLMHZzhFog==" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
+
+      
+    function fetchdata(){
+    $.ajax({
+      url: '/readSensor',
+      type: 'GET',
+      success: function(response){
+        $( "#temp" ).html( response.Tempurature );    
+                  $( "#humidity" ).html( response.Humidity );  
+      }
+    });
+    }
+
+
       $(document).ready(function(){
+
+        //Up Down Controllers
         $("#up").on("click", function(){
           $.get( "/rotate?rotations=1&direction=up", function( data ) {
             
@@ -19,6 +35,21 @@
             
           });
         })
+                
+        var update = function() {
+            $.ajax({
+                type : 'GET',
+                url : '/readSensor',
+                success : function(data){
+                  $( "#temp" ).html( data.Tempurature );    
+                  $( "#humidity" ).html( data.Humidity );  
+                  var refInterval = window.setTimeout('update()', 3000); // 30 seconds
+                },
+            });
+        };
+        
+        setInterval(fetchdata,5000);
+    
       })
     </script>
   </head>
@@ -26,6 +57,8 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
 
+    <h2><span id="temp"></span></h2><br>
+    <h2><span id="humidity"></span></h2><br>
     <a id="up"><i class="fas fa-arrow-up"></i></a>
     <a id="down"><i class="fas fa-arrow-down"></i></a>
   </body>

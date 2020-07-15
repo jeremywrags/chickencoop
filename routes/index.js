@@ -10,6 +10,17 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/readSensor', function(req, res, next) {
+  sensor.read(22, 4, function(err, temperature, humidity) {
+    if (!err) {
+      res.send({
+        "Tempurature" : (((9/5)*temperature)+32).toFixed(1) + "°F", 
+        "Humidity" : humidity.toFixed(1) + "%"
+      })
+    }
+  });  
+});
+
 /* GET home page. */
 router.get('/rotate', function(req, res, next) {
   
@@ -30,5 +41,7 @@ router.get('/rotate', function(req, res, next) {
     res.send(dataToSend);
   });
 });
+
+
 
 module.exports = router;
