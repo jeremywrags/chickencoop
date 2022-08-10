@@ -10,7 +10,7 @@
     <script type="text/javascript">
 
       
-    function fetchdata(){
+   /* function fetchdata(){
     $.ajax({
       url: '/readSensor',
       type: 'GET',
@@ -20,12 +20,12 @@
       }
     });
     }
-
+*/
 
       $(document).ready(function(){
 
         //Up Down Controllers
-        $("#up").on("click", function(){
+       /* $("#up").on("click", function(){
           $.get( "/rotate?rotations=1&direction=up", function( data ) {
             
           });
@@ -48,18 +48,26 @@
             });
         };
         
-        setInterval(fetchdata,5000);
-    
+       setInterval(fetchdata,5000);
+    */
       })
     </script>
   </head>
   <body>
-    <h1><%= title %></h1>
+    <!--h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
 
     <h2><span id="temp"></span></h2><br>
     <h2><span id="humidity"></span></h2><br>
     <a id="up"><i class="fas fa-arrow-up"></i></a>
-    <a id="down"><i class="fas fa-arrow-down"></i></a>
+    <a id="down"><i class="fas fa-arrow-down"></i></a-->
+      <table>
+        <tr>
+          <td><img src="https://media3.giphy.com/media/mutazA0g5NHmU/200w.webp?cid=ecf05e47ogmni1zt85kawztz5xiejlzhjczn5eanabwpb3l7&rid=200w.webp&ct=g"/></td>
+          <td><img src="https://media2.giphy.com/media/e05GB2c86qgOk/giphy.webp?cid=ecf05e47apoe04r4s8j5m2jzhbbvivu6zypm3mtg5lhchs0o&rid=giphy.webp&ct=g"/></td>
+          <td><img src="https://media4.giphy.com/media/WeM3bi1akoVQ4/200w.webp?cid=ecf05e47qtxmmrukhctu0ci0gdsdxz0vebxu3nch4x2l8gl7&rid=200w.webp&ct=g"/></td>
+          
+        </tr>
+      </table>
   </body>
 </html>
